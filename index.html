@@ -1,0 +1,773 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lenoxx Hub | Quality Food Services</title>
+
+<style>
+:root {
+  --maroon: #650d20;
+  --dark: #390611;
+  --gold: #f5b51b;
+  --cream: #fffaf3;
+  --white: #ffffff;
+  --text: #30272a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--text);
+}
+
+header {
+  background: var(--maroon);
+  color: white;
+  padding: 16px 7%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--gold);
+}
+
+.logo span { color: white; }
+
+nav {
+  display: flex;
+  gap: 23px;
+  align-items: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover { color: var(--gold); }
+
+.cart-button, .primary-btn {
+  background: var(--gold);
+  color: var(--dark);
+  border: none;
+  padding: 12px 19px;
+  border-radius: 7px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.hero {
+  min-height: 480px;
+  background:
+    linear-gradient(90deg, rgba(45,4,13,.91), rgba(45,4,13,.35)),
+    url("https://images.unsplash.com/photo-1547592180-85f173990554?w=1600")
+    center/cover;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 70px 8%;
+}
+
+.hero-content { max-width: 620px; }
+
+.hero h1 {
+  font-size: clamp(38px, 6vw, 65px);
+  margin-bottom: 20px;
+  line-height: 1.1;
+}
+
+.hero h1 span { color: var(--gold); }
+
+.hero p {
+  font-size: 18px;
+  line-height: 1.7;
+  margin-bottom: 27px;
+}
+
+section { padding: 65px 7%; }
+
+.section-title {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.section-title h2 {
+  font-size: 34px;
+  color: var(--maroon);
+  margin-bottom: 10px;
+}
+
+.section-title p { color: #777; }
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  text-align: center;
+}
+
+.feature {
+  padding: 25px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 3px 15px #0000000c;
+}
+
+.feature .emoji { font-size: 35px; }
+
+.feature h3 {
+  margin: 12px 0;
+  color: var(--maroon);
+}
+
+.menu-section { background: #fff; }
+
+.menu-tools {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.menu-tools input {
+  width: min(350px, 100%);
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 7px;
+  font-size: 15px;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin-bottom: 30px;
+}
+
+.category-btn {
+  padding: 10px 17px;
+  border: 1px solid var(--maroon);
+  background: white;
+  color: var(--maroon);
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+.category-btn.active,
+.category-btn:hover {
+  background: var(--maroon);
+  color: white;
+}
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.food-card {
+  background: white;
+  border-radius: 13px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px #00000012;
+  transition: transform .2s;
+}
+
+.food-card:hover { transform: translateY(-5px); }
+
+.food-card img {
+  width: 100%;
+  height: 205px;
+  object-fit: cover;
+}
+
+.food-info { padding: 18px; }
+
+.food-info h3 {
+  color: var(--maroon);
+  margin-bottom: 9px;
+}
+
+.food-info p {
+  color: #777;
+  font-size: 14px;
+  line-height: 1.5;
+  min-height: 40px;
+}
+
+.food-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 17px;
+  gap: 8px;
+}
+
+.price {
+  font-weight: bold;
+  color: var(--maroon);
+  font-size: 18px;
+}
+
+.add-btn {
+  background: var(--maroon);
+  color: white;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add-btn:hover { background: var(--dark); }
+
+.order-section { background: #fff5e6; }
+
+.order-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.panel {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 15px #0000000c;
+}
+
+.panel h3 {
+  color: var(--maroon);
+  margin-bottom: 20px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 8px;
+}
+
+.qty-controls button {
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 4px;
+  background: var(--gold);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.remove-btn {
+  color: #a00;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--maroon);
+}
+
+.empty-cart {
+  color: #888;
+  padding: 20px 0;
+}
+
+form label {
+  display: block;
+  font-weight: bold;
+  margin: 13px 0 7px;
+}
+
+form input, form textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+form textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+.submit-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 15px;
+  background: #168b46;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submit-btn:hover { background: #106d36; }
+
+.about {
+  text-align: center;
+  max-width: 850px;
+  margin: auto;
+  line-height: 1.8;
+}
+
+.about h2 {
+  color: var(--maroon);
+  margin-bottom: 20px;
+  font-size: 34px;
+}
+
+footer {
+  background: var(--dark);
+  color: white;
+  padding: 40px 7%;
+  text-align: center;
+  line-height: 2;
+}
+
+footer strong { color: var(--gold); }
+
+@media(max-width: 850px) {
+  .food-grid { grid-template-columns: repeat(2, 1fr); }
+  .order-layout { grid-template-columns: 1fr; }
+}
+
+@media(max-width: 600px) {
+  header { justify-content: center; }
+  nav { justify-content: center; flex-wrap: wrap; gap: 13px; }
+  .features { grid-template-columns: 1fr; }
+  .food-grid { grid-template-columns: 1fr; }
+  .hero { min-height: 420px; }
+  section { padding: 45px 5%; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">LENOXX <span>HUB</span></div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#menu">Our Menu</a>
+    <a href="#about">About Us</a>
+    <a href="#order">Order</a>
+  </nav>
+
+  <button class="cart-button" onclick="goToCart()">
+    🛒 Cart (<span id="cart-count">0</span>)
+  </button>
+</header>
+
+<!-- HOMEPAGE -->
+<div class="hero" id="home">
+  <div class="hero-content">
+    <h1>Good Food.<br><span>Good Mood!</span></h1>
+    <p>
+      Welcome to Lenoxx Hub! Enjoy delicious, fresh and
+      affordable meals made to keep students satisfied,
+      energized and ready for success.
+    </p>
+    <a href="#menu">
+      <button class="primary-btn">ORDER YOUR MEAL NOW</button>
+    </a>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section>
+  <div class="section-title">
+    <h2>Why Choose Lenoxx Hub?</h2>
+    <p>Good food and great service at prices students can enjoy.</p>
+  </div>
+
+  <div class="features">
+    <div class="feature">
+      <div class="emoji">🍛</div>
+      <h3>Delicious Meals</h3>
+      <p>Enjoy tasty meals prepared with care.</p>
+    </div>
+
+    <div class="feature">
+      <div class="emoji">💰</div>
+      <h3>Affordable Prices</h3>
+      <p>Quality food that respects your budget.</p>
+    </div>
+
+    <div class="feature">
+      <div class="emoji">🚚</div>
+      <h3>Easy Ordering</h3>
+      <p>Order conveniently and provide your delivery location.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOD MENU -->
+<section class="menu-section" id="menu">
+  <div class="section-title">
+    <h2>Explore Our Menu</h2>
+    <p>Choose your favourite meal and place your order.</p>
+  </div>
+
+  <div class="menu-tools">
+    <input type="text" id="search"
+      placeholder="Search for your favourite food..."
+      oninput="renderMenu()">
+  </div>
+
+  <div class="categories">
+    <button class="category-btn active" onclick="setCategory('All',this)">All Meals</button>
+    <button class="category-btn" onclick="setCategory('Rice',this)">Rice Meals</button>
+    <button class="category-btn" onclick="setCategory('Local',this)">Local Foods</button>
+    <button class="category-btn" onclick="setCategory('Snacks',this)">Snacks</button>
+    <button class="category-btn" onclick="setCategory('Drinks',this)">Drinks</button>
+  </div>
+
+  <div class="food-grid" id="food-grid"></div>
+</section>
+
+<!-- CART AND CHECKOUT -->
+<section class="order-section" id="order">
+  <div class="section-title">
+    <h2>Place Your Order</h2>
+    <p>Review your cart and enter your delivery information.</p>
+  </div>
+
+  <div class="order-layout">
+
+    <div class="panel" id="cart-panel">
+      <h3>🛒 Your Shopping Cart</h3>
+      <div id="cart-items">
+        <p class="empty-cart">Your cart is currently empty.</p>
+      </div>
+      <div class="total">
+        <span>Total:</span>
+        <span id="cart-total">GH₵0.00</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>📋 Customer Details</h3>
+
+      <form id="checkout-form">
+        <label for="customer">Full Name</label>
+        <input id="customer" type="text" placeholder="Enter your full name" required>
+
+        <label for="phone">Phone Number</label>
+        <input id="phone" type="tel" placeholder="Enter your phone number" required>
+
+        <label for="location">Hostel / Delivery Location</label>
+        <input id="location" type="text" placeholder="Enter your hostel or location" required>
+
+        <label for="notes">Additional Instructions</label>
+        <textarea id="notes" placeholder="Any special instructions? (Optional)"></textarea>
+
+        <button class="submit-btn" type="submit">
+          ORDER VIA MAIL
+        </button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT US -->
+<section id="about">
+  <div class="about">
+    <h2>About Lenoxx Hub</h2>
+    <p>
+      Lenoxx Hub is a student-focused food service business
+      committed to providing quality, delicious and affordable
+      meals. We understand the importance of good food in
+      student life. Our goal is to make ordering meals easy,
+      convenient and enjoyable.
+    </p>
+    <br>
+    <strong style="color:#650d20;">
+      Lenoxx Hub – Quality Food Services for Students.
+    </strong>
+  </div>
+</section>
+
+<footer>
+  <div class="logo">LENOXX HUB</div>
+  <p>Quality Food Services for Students.</p>
+  <p>Eat Well • Learn Better • Stay Energized</p>
+  <p>Contact: Add your business phone number</p>
+  <p>© 2026 Lenoxx Hub. All Rights Reserved.</p>
+</footer>
+
+<script>
+// =====================================
+// EDIT YOUR FOOD MENU AND PRICES HERE
+// =====================================
+
+const foods = [
+  {
+    id: 1,
+    name: "Jollof Rice & Chicken",
+    category: "Rice",
+    price: 35,
+    description: "Tasty Ghanaian jollof served with grilled chicken.",
+    image: "https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=600"
+  },
+  {
+    id: 2,
+    name: "Fried Rice & Chicken",
+    category: "Rice",
+    price: 40,
+    description: "Delicious fried rice with chicken and vegetables.",
+    image: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=600"
+  },
+  {
+    id: 3,
+    name: "Waakye",
+    category: "Local",
+    price: 30,
+    description: "Traditional waakye with your favourite sides.",
+    image: "https://images.unsplash.com/photo-1547592180-85f173990554?w=600"
+  },
+  {
+    id: 4,
+    name: "Banku & Tilapia",
+    category: "Local",
+    price: 55,
+    description: "Banku served with grilled tilapia and pepper.",
+    image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600"
+  },
+  {
+    id: 5,
+    name: "Chicken Sandwich",
+    category: "Snacks",
+    price: 25,
+    description: "Fresh sandwich filled with delicious chicken.",
+    image: "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?w=600"
+  },
+  {
+    id: 6,
+    name: "Fresh Fruit Juice",
+    category: "Drinks",
+    price: 15,
+    description: "Refreshing fruit juice to keep you energized.",
+    image: "https://images.unsplash.com/photo-1613478223719-2ab802602423?w=600"
+  }
+];
+
+let cart = [];
+let selectedCategory = "All";
+
+function money(amount) {
+  return "GH₵" + amount.toFixed(2);
+}
+
+function renderMenu() {
+  const grid = document.getElementById("food-grid");
+  const search = document.getElementById("search").value.toLowerCase();
+
+  const filtered = foods.filter(food =>
+    (selectedCategory === "All" || food.category === selectedCategory) &&
+    food.name.toLowerCase().includes(search)
+  );
+
+  if (!filtered.length) {
+    grid.innerHTML = "<p>No meals found. Try another search.</p>";
+    return;
+  }
+
+  grid.innerHTML = filtered.map(food => `
+    <div class="food-card">
+      <img src="${food.image}" alt="${food.name}"
+           loading="lazy"
+           onerror="this.src='https://placehold.co/600x400?text=Lenoxx+Hub'">
+      <div class="food-info">
+        <h3>${food.name}</h3>
+        <p>${food.description}</p>
+        <div class="food-bottom">
+          <span class="price">${money(food.price)}</span>
+          <button class="add-btn" onclick="addToCart(${food.id})">
+            + Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function setCategory(category, button) {
+  selectedCategory = category;
+
+  document.querySelectorAll(".category-btn")
+    .forEach(btn => btn.classList.remove("active"));
+
+  button.classList.add("active");
+  renderMenu();
+}
+
+function addToCart(id) {
+  const food = foods.find(item => item.id === id);
+  const existing = cart.find(item => item.id === id);
+
+  if (existing) {
+    existing.quantity++;
+  } else {
+    cart.push({...food, quantity: 1});
+  }
+
+  renderCart();
+}
+
+function changeQuantity(id, amount) {
+  const item = cart.find(item => item.id === id);
+  if (!item) return;
+
+  item.quantity += amount;
+
+  if (item.quantity <= 0) {
+    cart = cart.filter(item => item.id !== id);
+  }
+
+  renderCart();
+}
+
+function removeItem(id) {
+  cart = cart.filter(item => item.id !== id);
+  renderCart();
+}
+
+function renderCart() {
+  const container = document.getElementById("cart-items");
+  const totalElement = document.getElementById("cart-total");
+
+  const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+  document.getElementById("cart-count").textContent = count;
+
+  if (cart.length === 0) {
+    container.innerHTML = '<p class="empty-cart">Your cart is currently empty.</p>';
+  } else {
+    container.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div>
+          <strong>${item.name}</strong>
+          <div>${money(item.price)} each</div>
+          <div class="qty-controls">
+            <button onclick="changeQuantity(${item.id},-1)">−</button>
+            <span>${item.quantity}</span>
+            <button onclick="changeQuantity(${item.id},1)">+</button>
+            <button class="remove-btn" onclick="removeItem(${item.id})">
+              Remove
+            </button>
+          </div>
+        </div>
+        <strong>${money(item.price * item.quantity)}</strong>
+      </div>
+    `).join("");
+  }
+
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity, 0
+  );
+
+  totalElement.textContent = money(total);
+}
+
+function goToCart() {
+  document.getElementById("order").scrollIntoView({behavior:"smooth"});
+}
+
+document.getElementById("checkout-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  if (cart.length === 0) {
+    alert("Please add a meal to your cart first.");
+    return;
+  }
+
+  const name = document.getElementById("customer").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const location = document.getElementById("location").value.trim();
+  const notes = document.getElementById("notes").value.trim();
+
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.quantity, 0
+  );
+
+  let message = "HELLO LENOXX HUB! I WANT TO PLACE AN ORDER.%0A%0A";
+
+  message += "Customer: " + encodeURIComponent(name) + "%0A";
+  message += "Phone: " + encodeURIComponent(phone) + "%0A";
+  message += "Location: " + encodeURIComponent(location) + "%0A%0A";
+
+  message += "MY ORDER:%0A";
+
+  cart.forEach(item => {
+    message += encodeURIComponent(
+      item.name + " x " + item.quantity + " = " +
+      money(item.price * item.quantity)
+    ) + "%0A";
+  });
+
+  message += "%0ATOTAL: " + encodeURIComponent(money(total));
+  message += "%0ANotes: " + encodeURIComponent(notes || "None");
+
+  // REPLACE THIS WITH YOUR WHATSAPP NUMBER.
+  // Use international format without + or spaces.
+  const whatsappNumber = "233XXXXXXXXX";
+
+  if (!/^233\d{9}$/.test(whatsappNumber)) {
+    alert("Please update the WhatsApp number in the website code before accepting orders.");
+    return;
+  }
+
+  window.open(
+    "https://wa.me/" + whatsappNumber + "?text=" + message,
+    "_blank"
+  );
+});
+
+renderMenu();
+renderCart();
+</script>
+
+</body>
+</html>
